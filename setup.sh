@@ -61,7 +61,7 @@ docker pull nvcr.io/nvidia/isaac-sim-comp-check:4.5.0
 docker run --name isaac-sim-comp-check --runtime=nvidia --gpus all -e "ACCEPT_EULA=Y" --rm --network=host -e "PRIVACY_CONSENT=Y" nvcr.io/nvidia/isaac-sim-comp-check:4.5.0
 
 # -- Install WireGuard --
-sufo ufw allow 51820
+sudo ufw allow 51820
 sudo apt install -y wireguard
 
 # Generate WireGuard Server Keys
