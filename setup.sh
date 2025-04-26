@@ -3,6 +3,8 @@ if [ -z "$DEV_PASSWORD" ]; then
   exit 1
 fi
 
+sudo sed -i "s/#\$nrconf{restart} = 'i';/\$nrconf{restart} = 'a';/" /etc/needrestart/needrestart.conf
+
 # -- Create dev user --
 useradd -m -g sudo dev
 echo "dev:$DEV_PASSWORD" | chpasswd
@@ -94,17 +96,5 @@ sudo systemctl enable wg-quick@wg0
 docker pull nvcr.io/nvidia/isaac-sim:4.5.0
 
 # Run Isaac Sim Container
-# docker run --name isaac-sim --entrypoint bash -it --runtime=nvidia --gpus all -e "ACCEPT_EULA=Y" --rm --network=host \
-#     -e "PRIVACY_CONSENT=Y" \
-#     -v ~/docker/isaac-sim/cache/kit:/isaac-sim/kit/cache:rw \
-#     -v ~/docker/isaac-sim/cache/ov:/root/.cache/ov:rw \
-#     -v ~/docker/isaac-sim/cache/pip:/root/.cache/pip:rw \
-#     -v ~/docker/isaac-sim/cache/glcache:/root/.cache/nvidia/GLCache:rw \
-#     -v ~/docker/isaac-sim/cache/computecache:/root/.nv/ComputeCache:rw \
-#     -v ~/docker/isaac-sim/logs:/root/.nvidia-omniverse/logs:rw \
-#     -v ~/docker/isaac-sim/data:/root/.local/share/ov/data:rw \
-#     -v ~/docker/isaac-sim/documents:/root/Documents:rw \
-#     nvcr.io/nvidia/isaac-sim:4.5.0
-  
 
 EOF
